@@ -1,0 +1,21 @@
+version: "3"
+services:
+  summarizer:
+    build: app/
+    ports:
+      - 5000:5000
+    depends_on:
+      - ollama
+  ollama:
+    image: ollama/ollama:latest
+    ports:
+      - "11434:11434"
+    volumes:
+      - /home/valentina/.ollama:/root/.ollama
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [gpu]
