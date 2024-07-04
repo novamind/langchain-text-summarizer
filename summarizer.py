@@ -2,8 +2,10 @@ from langchain_community.llms import Ollama
 from langchain_community.document_loaders import WebBaseLoader
 from langchain.chains.summarize import load_summarize_chain
 
-# TODO: use env variables for base_url
-llm = Ollama(model="llama2", base_url="http://ollama:11434")
+# TODO: use env variables for llm_name, base_url
+LLM_NAME = "llama2"
+LLM_BASE_URL = "http://ollama:11434"
+llm = Ollama(model=LLM_NAME, base_url=LLM_BASE_URL)
 
 
 def load_docs(links):

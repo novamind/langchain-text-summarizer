@@ -1,7 +1,7 @@
 version: "3"
 services:
   summarizer:
-    build: app/
+    build: .
     ports:
       - 5000:5000
     depends_on:
@@ -11,7 +11,7 @@ services:
     ports:
       - "11434:11434"
     volumes:
-      - /home/valentina/.ollama:/root/.ollama
+      - ${HOME}/.ollama:/root/.ollama
     deploy:
       resources:
         reservations:
