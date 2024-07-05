@@ -4,7 +4,7 @@ from langchain.chains.summarize import load_summarize_chain
 
 # TODO: use env variables for llm_name, base_url
 LLM_NAME = "llama2"
-LLM_BASE_URL = "http://ollama:11434"
+LLM_BASE_URL = "http://ollama:11435"
 llm = Ollama(model=LLM_NAME, base_url=LLM_BASE_URL)
 
 
