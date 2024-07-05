@@ -9,9 +9,10 @@ A Proof of Concept (PoC) that demonstrates the potential of local data processin
 
 ## Prerequisites
 
-- [Download](https://ollama.com/download/windows) and install Ollama
-- Fetch the `llama2` model:
+- [Download](https://ollama.com/download) and install Ollama
+- Start `ollama` and pull the `llama2` model:
 ```bash
+ollama serve
 ollama pull llama2
 ```
 
@@ -22,20 +23,25 @@ Clone the repository and use the `docker-compose` commands to build and start th
 ```bash
 git clone https://github.com/novamind/text_summarization.git
 cd text_summarization
-docker-compose up
+```
+If your machine has an Nvidia GPU:
+```bash
+docker-compose -f docker-compose-cuda.yml up
+```
+Otherwise:
+```bash
+docker-compose -f docker-compose-cpu.yml up
 ```
 
 ## Usage
 
 The endpoint accepts a JSON payload containing the URLs to be summarized as following:
+
 ```bash
-curl -i -H "Content-Type: application/json" -X POST -d '{"urls":["https://example.com/"]}' http://localhost:5000/summarize
-```
-## Example Response
-```bash
-curl -i -H "Content-Type: application/json" -X POST -d '{"urls":["https://habr.com/en/articles/818317/"]}' http://localhost:5000/summarize
+curl -i -H "Content-Type: application/json" -X POST -d '{"urls":["https://en.wikipedia.org/wiki/Activation_function"]}' http://localhost:5000/summarize
 ```
 
 This returned the following summary on my machine. You can get a different response.
 
-![image](https://github.com/novamind/text_summarization/assets/26347574/a1e8e28e-42a1-4c40-9285-dfc79b0733c8)
+![image](https://github.com/novamind/text_summarization/assets/26347574/03aaef8b-de6c-492d-8a87-f9afcf2a97a3)
+
