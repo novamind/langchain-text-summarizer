@@ -1,10 +1,25 @@
+import os
+import requests
 from langchain_community.llms import Ollama
+
+from langchain_community.embeddings import OllamaEmbeddings
 from langchain_community.document_loaders import WebBaseLoader
 from langchain.chains.summarize import load_summarize_chain
+from langchain.chains import create_retrieval_chain
+from langchain.chains.combine_documents import create_stuff_documents_chain
+from langchain_text_splitters import RecursiveCharacterTextSplitter
+from langchain_chroma import Chroma
 
-# TODO: use env variables for llm_name, base_url
-LLM_NAME = "llama2"
-LLM_BASE_URL = "http://ollama:11435"
+LLM_NAME = os.environ.get("LLM_NAME")
+OLLAMA_HOST = os.environ.get("OLLAMA_HOST")
+LLM_BASE_URL = f"http://{OLLAMA_HOST}"
+
+# pull the LLM
+# TODO: add logger
+url = f"{LLM_BASE_URL}/api/pull"
+payload = {"name": LLM_NAME}
+response = requests.post(url, json=payload)
+
 llm = Ollama(model=LLM_NAME, base_url=LLM_BASE_URL)
 
 
