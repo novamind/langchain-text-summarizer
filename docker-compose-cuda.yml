@@ -6,12 +6,14 @@ services:
       - 5000:5000
     depends_on:
       - ollama
+    env_file:
+      - .env
   ollama:
     image: ollama/ollama:latest
-    ports:
-      - "11434:11435"
+    env_file:
+      - .env
     volumes:
-      - ${HOME}/.ollama:/root/.ollama
+      - ./.ollama:/root/.ollama
     deploy:
       resources:
         reservations:
