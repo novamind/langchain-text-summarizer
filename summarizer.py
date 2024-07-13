@@ -5,10 +5,6 @@ from langchain_community.llms import Ollama
 from langchain_community.embeddings import OllamaEmbeddings
 from langchain_community.document_loaders import WebBaseLoader
 from langchain.chains.summarize import load_summarize_chain
-from langchain.chains import create_retrieval_chain
-from langchain.chains.combine_documents import create_stuff_documents_chain
-from langchain_text_splitters import RecursiveCharacterTextSplitter
-from langchain_chroma import Chroma
 
 LLM_NAME = os.environ.get("LLM_NAME")
 OLLAMA_HOST = os.environ.get("OLLAMA_HOST")
