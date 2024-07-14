@@ -31,6 +31,8 @@ docker-compose -f docker-compose-cpu.yml up
 
 3. Visit [http://localhost:8501](http://localhost:8501) and provide your link to summarize the content
 
+![image](https://github.com/user-attachments/assets/4726f23c-147a-4050-a5aa-f871d07f1ee9)
+
 ## Configuration
 
 Use the .env file to change the model settings.
