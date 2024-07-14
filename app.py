@@ -1,15 +1,16 @@
 from flask import Flask, request
-from summarizer import load_docs, summarize_docs
+from summarizer import OllamaSummarizer
 
 app = Flask(__name__)
+summarizer = OllamaSummarizer()
 
 
 @app.route("/summarize", methods=["post"])
 def get_summary():
 
     data = request.json
-    docs = load_docs(data["urls"])
-    result = summarize_docs(docs)
+    docs = summarizer.load_docs(data["urls"])
+    result = summarizer.summarize_docs(docs)
 
     return result
 
