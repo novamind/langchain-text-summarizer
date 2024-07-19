@@ -7,6 +7,8 @@ A Proof of Concept (PoC) that demonstrates the potential of local data processin
 - Streamlit Interface: Provides a user-friendly UI for interactions
 - Microservice Architecture: Uses Docker for containerized deployment
 
+![image](https://github.com/user-attachments/assets/244e0d75-cfec-45db-bb9e-039fdceea479)
+
 ## Quick Start
 
 Follow these steps to clone the repository and start the service using Docker Compose.
