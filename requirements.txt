@@ -1,5 +1,6 @@
 Flask==3.0.3
 langchain==0.2.5
 langchain-community==0.2.5
+langchain_chroma
 bs4==0.0.2
 streamlit
