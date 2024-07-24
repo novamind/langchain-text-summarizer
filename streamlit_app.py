@@ -9,11 +9,11 @@ def get_summarizer():
 
 summarizer = get_summarizer()
 st.title("🦜🔗 Content Assistant")
+
+url = st.text_area("Enter a link:", "https://example.com")
+st.header("Summarization")
 with st.form("my_form"):
-    url = st.text_area(
-        "Enter a link:",
-        "https://example.com"
-    )
+
     submitted = st.form_submit_button("Summarize")
     if submitted:
         with st.spinner("Summarizing..."):
@@ -22,8 +22,9 @@ with st.form("my_form"):
             st.success("Done!")
             st.markdown(result)
 
+st.header("Question Answering")
 with st.form("my_form2"):
-    # TODO: load docs only once   
+    # TODO: load docs only once
     docs = summarizer.load_docs(url)
     question = st.text_area(
         "Ask a question:",
@@ -33,4 +34,5 @@ with st.form("my_form2"):
     if asked:
         with st.spinner("Answering..."):
             response = summarizer.get_answer(docs, question)
+            st.success("Done!")
             st.markdown(response["answer"])
