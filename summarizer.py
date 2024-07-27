@@ -19,6 +19,7 @@ class OllamaSummarizer:
         LLM_BASE_URL = f"http://{OLLAMA_HOST}"
 
         self.llm = self.load_llm(LLM_NAME, LLM_BASE_URL)
+        self.embeddings = OllamaEmbeddings(base_url=LLM_BASE_URL, model=LLM_NAME)
 
     def load_llm(self, LLM_NAME, LLM_BASE_URL):
         # TODO: add logger
@@ -45,21 +46,13 @@ class OllamaSummarizer:
         text_splitter = RecursiveCharacterTextSplitter(chunk_size=500)
         documents = text_splitter.split_documents(docs)
 
-        OLLAMA_HOST = os.environ.get("OLLAMA_HOST")
-        embeddings = OllamaEmbeddings(base_url=f"http://{OLLAMA_HOST}")
-
-        vector = Chroma.from_documents(documents, embeddings)
+        vector = Chroma.from_documents(documents, self.embeddings)
         system_prompt = (
-            """
-                Answer the user's questions based on the below context. 
-                If the context doesn't contain any relevant information to the question, don't make something up and just say "I don't know":
-
-                <context>
-                {context}
-                </context>
-                """
+            "Answer the user's questions based on the below context. "
+            "If the context doesn't contain any relevant information to the question, "
+            """don't make something up and just say "I don't know": """
+            "<context>{context}</context>"
         )
-
         prompt = ChatPromptTemplate.from_messages(
             [
                 ("system", system_prompt),
@@ -79,11 +72,10 @@ if __name__ == "__main__":
 
     summarizer = OllamaSummarizer()
     # TODO add cmdline parser
-    links = [
-        "https://towardsdatascience.com/17-types-of-similarity-and-dissimilarity-measures-used-in-data-science-3eb914d2681"
-    ]
+    links = ["https://example.com"]
     docs = summarizer.load_docs(links)
 
     # result = summarizer.summarize_docs(docs)
     # print(result)
-    summarizer.get_answer(docs)
+    question = "What is this website about?"
+    summarizer.get_answer(docs, question)
