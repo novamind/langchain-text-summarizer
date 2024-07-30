@@ -17,8 +17,8 @@ Follow these steps to clone the repository and start the service using Docker Co
 1. Clone the repository:
 
 ```bash
-git clone https://github.com/novamind/langchain-text-summarizer.git
-cd langchain-text-summarizer
+git clone https://github.com/novamind/local-text-assistant.git
+cd local-text-assistant
 ```
 
 2. Start the service:
